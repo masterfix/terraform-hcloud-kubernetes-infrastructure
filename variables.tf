@@ -124,3 +124,9 @@ variable "worker_name" {
   type    = string
   default = "worker"
 }
+
+variable "dns_ttl" {
+  description = "TTL of the dns records."
+  type = number
+  default = 86400
+}

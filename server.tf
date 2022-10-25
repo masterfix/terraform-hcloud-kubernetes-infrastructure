@@ -151,7 +151,7 @@ resource "hetznerdns_record" "master_ipv4" {
   name    = hcloud_server.master[count.index].name
   value   = hcloud_server.master[count.index].ipv4_address
   type    = "A"
-  ttl     = 60
+  ttl     = var.dns_ttl
 }
 
 resource "hetznerdns_record" "worker_ipv4" {
@@ -160,5 +160,5 @@ resource "hetznerdns_record" "worker_ipv4" {
   name    = hcloud_server.worker[count.index].name
   value   = hcloud_server.worker[count.index].ipv4_address
   type    = "A"
-  ttl     = 60
+  ttl     = var.dns_ttl
 }

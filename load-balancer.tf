@@ -40,7 +40,7 @@ resource "hetznerdns_record" "lb_master_ipv4" {
   name    = hcloud_load_balancer.master.name
   value   = hcloud_load_balancer.master.ipv4
   type    = "A"
-  ttl     = 60
+  ttl     = var.dns_ttl
 }
 
 resource "hetznerdns_record" "lb_master_ipv6" {
@@ -48,7 +48,7 @@ resource "hetznerdns_record" "lb_master_ipv6" {
   name    = hcloud_load_balancer.master.name
   value   = hcloud_load_balancer.master.ipv6
   type    = "AAAA"
-  ttl     = 60
+  ttl     = var.dns_ttl
 }
 
 resource "hcloud_load_balancer_service" "k3s" {
