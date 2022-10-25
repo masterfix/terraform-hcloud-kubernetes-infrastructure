@@ -1,0 +1,20 @@
+#cloud-config
+
+fqdn: ${fqdn}
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - unattended-upgrades
+  - python3-gi
+  - powermgmt-base
+  - apparmor
+  - apparmor-utils
+  - open-iscsi
+  - nfs-common
+
+ssh_pwauth: false
+
+runcmd:
+  - sed -i -e '/^AcceptEnv/s/^.*$/#AcceptEnv LANG LC_\*/' /etc/ssh/sshd_config
