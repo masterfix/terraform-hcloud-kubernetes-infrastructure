@@ -20,7 +20,7 @@ output "workers" {
 }
 
 output "load_balancers" {
-  description = "Details about the generated balancers."
+  description = "Details about the generated load balancers."
   value = {
     "admin" = {
       "public_ipv4" = "${hcloud_rdns.lb_master_ipv4.ip_address}"
