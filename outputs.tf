@@ -33,23 +33,45 @@ output "load_balancers" {
     "admin" = {
       "public_ipv4"     = "${hcloud_rdns.lb_master_ipv4.ip_address}"
       "public_hostname" = "${hcloud_rdns.lb_master_ipv4.dns_ptr}"
+      "urls" = [
+        "https://${hcloud_rdns.lb_master_ipv4.ip_address}:6443",
+        "https://${hcloud_rdns.lb_master_ipv4.dns_ptr}:6443",
+      ]
     },
   }
 }
 
 output "masters_ready" {
   description = "All master machines are up and running."
-  value       = null_resource.master_up
+  value       = true
+
+  depends_on = [
+    null_resource.master_up,
+  ]
 }
 
 output "workers_ready" {
   description = "All worker machines are up and running."
-  value       = null_resource.worker_up
+  value       = true
+
+  depends_on = [
+    null_resource.worker_up,
+  ]
 }
 
 output "network_name" {
   description = "The name of the generated network."
   value       = hcloud_network.k3s.name
+}
+
+output "ready" {
+  description = "All machines are up and running."
+  value       = true
+
+  depends_on = [
+    null_resource.master_up,
+    null_resource.worker_up,
+  ]
 }
 
 output "bastion" {
