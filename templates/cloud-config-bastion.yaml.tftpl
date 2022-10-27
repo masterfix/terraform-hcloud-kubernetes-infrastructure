@@ -1,0 +1,8 @@
+#cloud-config
+
+fqdn: ${fqdn}
+
+ssh_pwauth: false
+
+runcmd:
+  - sed -i -e '/^AcceptEnv/s/^.*$/#AcceptEnv LANG LC_\*/' /etc/ssh/sshd_config

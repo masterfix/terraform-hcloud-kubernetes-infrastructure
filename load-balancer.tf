@@ -17,10 +17,6 @@ resource "hcloud_load_balancer_target" "master" {
   type             = "server"
   server_id        = hcloud_server.master[count.index].id
   use_private_ip   = true
-
-  depends_on = [
-    hcloud_server_network.master
-  ]
 }
 
 resource "hcloud_rdns" "lb_master_ipv4" {
