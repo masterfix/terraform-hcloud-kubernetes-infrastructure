@@ -31,8 +31,9 @@ output "load_balancers" {
   description = "Details about the generated load balancers."
   value = {
     "admin" = {
-      "public_ipv4"     = "${hcloud_rdns.lb_master_ipv4.ip_address}"
-      "public_hostname" = "${hcloud_rdns.lb_master_ipv4.dns_ptr}"
+      "public_ipv4"     = hcloud_rdns.lb_master_ipv4.ip_address
+      "public_hostname" = hcloud_rdns.lb_master_ipv4.dns_ptr
+      "location"        = hcloud_load_balancer.master.location
       "urls" = [
         "https://${hcloud_rdns.lb_master_ipv4.ip_address}:6443",
         "https://${hcloud_rdns.lb_master_ipv4.dns_ptr}:6443",
@@ -62,6 +63,15 @@ output "workers_ready" {
 output "network_name" {
   description = "The name of the generated network."
   value       = hcloud_network.k3s.name
+}
+
+output "network" {
+  description = "Details about the generated network."
+  value = {
+    "id"     = hcloud_network.k3s.id
+    "name"   = hcloud_network.k3s.name
+    "subnet" = cidrsubnet(hcloud_network.k3s.ip_range, 16, 1)
+  }
 }
 
 output "ready" {
